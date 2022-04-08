@@ -3,7 +3,7 @@ import { useState, useRef } from "react";
 import Axios from "axios";
 import { useHistory } from "react-router-dom";
 
-function Modal() {
+function Update(props) {
   const nodeRef = useRef(null);
   let history = useHistory(); //뒤로가기
 
@@ -12,15 +12,16 @@ function Modal() {
   const trackPos = (data) => {
     setPosition({ x: data.x, y: data.y });
   };
-  let [name, setName] = useState("");
-  let [title, setTitle] = useState("");
-  let [text, setText] = useState("");
+  let [name, setName] = useState(props.name);
+  let [title, setTitle] = useState(props.title);
+  let [text, setText] = useState(props.text);
 
-  const addEmployee = () => {
-    Axios.post("http://localhost:3001/board/create", {
+  const updateEmployee = () => {
+    Axios.put(`http://localhost:3001/board/${props.id}`, {
       name: name,
       title: title,
       text: text,
+      id: props.id,
     }).then(() => {
       console.log("success");
       history.goback();
@@ -32,8 +33,9 @@ function Modal() {
       <Draggable onDrag={(e, data) => trackPos(data)} nodeRef={nodeRef}>
         <div ref={nodeRef} className="box">
           <div className="information">
-            <label>작성자</label>
+            <label>Name:</label>
             <input
+              value={name}
               type="text"
               onChange={(e) => {
                 setName(e.target.value);
@@ -41,6 +43,7 @@ function Modal() {
             />
             <label>Title:</label>
             <input
+              value={title}
               type="text"
               onChange={(e) => {
                 setTitle(e.target.value);
@@ -48,6 +51,7 @@ function Modal() {
             />
             <label>Text:</label>
             <input
+              value={text}
               style={{ height: "50px" }}
               type="text"
               onChange={(e) => {
@@ -57,8 +61,7 @@ function Modal() {
             <a href="/" style={{ textDecoration: "none" }}>
               <button
                 onClick={() => {
-                  addEmployee();
-                  history.push("/");
+                  updateEmployee();
                 }}
               >
                 저장
@@ -71,4 +74,4 @@ function Modal() {
     </div>
   );
 }
-export default Modal;
+export default Update;

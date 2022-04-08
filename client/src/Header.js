@@ -1,10 +1,6 @@
-import { Navbar, Container, Button } from "react-bootstrap";
-import Modal from "./Modal";
-import { useEffect, useState, Component } from "react";
+import { Navbar, Container } from "react-bootstrap";
 
 function Header() {
-  let [modal, setmodal] = useState(false);
-
   return (
     <>
       <Navbar>
@@ -12,14 +8,6 @@ function Header() {
           <Navbar.Brand href="/" className="main" style={{ color: "white" }}>
             R-Board
           </Navbar.Brand>
-          {modal === false ? null : <Modal />}
-          <button
-            onClick={() => {
-              setmodal(!modal);
-            }}
-          >
-            글쓰기
-          </button>
         </Container>
       </Navbar>
     </>

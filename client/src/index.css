@@ -1,24 +1,41 @@
-button:hover {
-  cursor: pointer;
-}
-
-.listone {
-  width: 200px;
-}
 .box {
   background-color: #eeeeee;
   flex-direction: column;
-  z-index: 20;
-  height: 600px;
-  width: 600px;
-  position: absolute;
-  top: 130px;
-  left: 1250px;
+  z-index: 2;
+  height: 400px;
+  width: 400px;
+  left: 500px;
   cursor: grab;
   border-radius: 30px;
   padding: 40px;
   margin: auto;
   user-select: none;
+}
+.box2 {
+  background-color: #eeeeee;
+  flex-direction: column;
+  z-index: 2;
+  height: 400px;
+  width: 400px;
+  left: 500px;
+  top: 200px;
+  cursor: grab;
+  border-radius: 30px;
+  padding: 40px;
+  margin: auto;
+  user-select: none;
+}
+.box_background {
+  z-index: 1;
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.8);
+}
+.other {
+  text-align: center;
 }
 
 .main {
@@ -30,14 +47,34 @@ button:hover {
   background-color: rgba(34, 40, 49);
   height: 80px;
 }
-.employees {
-  background: #393e46;
-  height: fit-content;
-}
-.line {
-  background-color: #00adb5;
-  align-items: center;
-}
+
 .card {
   border: 1px solid black;
+  border-radius: 10px;
+  margin-top: 10px;
+  padding: 10px;
+  height: 3rem;
+  cursor: pointer;
+  margin-left: 30%;
+  margin-right: 30%;
+  background: #00adb5;
+  width: 700px;
+  text-align: left;
+}
+.post {
+  cursor: pointer;
+}
+.h4 {
+  text-align: left;
+  width: 300px;
+}
+.h5 {
+  text-align: left;
+}
+.information {
+  width: 600px;
+  text-align: left;
+}
+.hour {
+  text-align: right;
 }

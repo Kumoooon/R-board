@@ -1,5 +1,4 @@
 const client = require("./connection.js");
-
 const express = require("express");
 const app = express();
 const cors = require("cors");
@@ -9,11 +8,9 @@ app.listen(3001, () => {
 });
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-
 client.connect();
-
-app.get("/users", (req, res) => {
-  client.query(`Select * from employees`, (err, result) => {
+app.get("/board", (req, res) => {
+  client.query(`SELECT * FROM board`, (err, result) => {
     if (!err) {
       res.send(result.rows);
     }
@@ -21,20 +18,23 @@ app.get("/users", (req, res) => {
   client.end;
 });
 
-app.get("/users/:id", (req, res) => {
+app.get("/board/:id", (req, res) => {
   client.query(
-    `Select * from employees where id = ${req.params.id}`,
+    `SELECT * FROM board WHERE id = ${req.params.id}`,
     (err, result) => {
       if (!err) {
         res.send(result.rows);
+      } else {
+        console.log(err.message);
       }
     }
   );
   client.end;
 });
-app.post("/users/create", (req, res) => {
+
+app.post("/board/create", (req, res) => {
   console.log(req.body);
-  let insertQuery = `insert into public.employees (id, name, title, text)values(${req.body.id},'${req.body.name}','${req.body.title}','${req.body.text}')`;
+  let insertQuery = `INSERT INTO public.board (name, title, text)VALUES('${req.body.name}','${req.body.title}','${req.body.text}')`;
   client.query(insertQuery, (err, result) => {
     if (!err) {
       res.send("Insertion was successful");
@@ -44,8 +44,11 @@ app.post("/users/create", (req, res) => {
   });
   client.end;
 });
-app.delete("/users/:id", (req, res) => {
-  let insertQuery = `delete from employees where id=${req.params.id}`;
+
+app.delete("/board/:id", (req, res) => {
+  let insertQuery = `DELETE FROM board WHERE id=${req.params.id}`;
+  console.log(req.params.id);
+
   client.query(insertQuery, (err, result) => {
     if (!err) {
       res.send("Deletion was successful");
@@ -55,17 +58,16 @@ app.delete("/users/:id", (req, res) => {
   });
   client.end;
 });
-app.put("/users/:id", (req, res) => {
-  const employee = req.body;
-  console.log(employee);
-  let updateQuery = `update employees
-    set name = '${employee.name}',
-    title = '${employee.title}',
-    text = '${employee.text}'
-    where id = ${employee.id}`;
+app.put("/board/:id", (req, res) => {
+  const change = req.body;
+  let updateQuery = `UPDATE board
+    set name = '${change.name}',
+    title = '${change.title}',
+    text = '${change.text}'
+    WHERE id = ${change.id}`;
   client.query(updateQuery, (err, result) => {
     if (!err) {
-      res.send("update was successful");
+      res.send("Update was successful");
     } else {
       console.log(err.message);
     }

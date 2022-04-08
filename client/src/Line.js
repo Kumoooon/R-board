@@ -1,13 +1,24 @@
+import { useHistory } from "react-router-dom";
+import { Route } from "react-router-dom";
+
 function Line(props) {
-  const detailPage = () => {
-    console.log("click");
-    this.props.history.push(`/detail${this.props.id}`);
-  };
+  let history = useHistory();
+
   return (
-    <div onClick={this.detailPage}>
-      <h3>{props.a.id}</h3>
-      <h4>{props.a.name}</h4>
-    </div>
+    <>
+      <div
+        onClick={() => {
+          history.push(`/detail/${props.a.id}`);
+        }}
+      >
+        <span className="post">
+          {props.a.name}님 ------
+          {props.a.title}
+        </span>
+        <span className="hour">-->{props.a.createtime}</span>
+        <Route path="/detail/:id"></Route>
+      </div>
+    </>
   );
 }
 export default Line;
