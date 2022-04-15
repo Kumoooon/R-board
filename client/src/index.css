@@ -1,6 +1,5 @@
 .box {
   background-color: #eeeeee;
-  flex-direction: column;
   z-index: 2;
   height: 400px;
   width: 400px;
@@ -9,12 +8,11 @@
   border-radius: 30px;
   padding: 40px;
   margin: auto;
-  user-select: none;
+  text-align: left;
 }
 .box2 {
   background-color: #eeeeee;
-  flex-direction: column;
-  z-index: 2;
+  z-index: 3;
   height: 400px;
   width: 400px;
   left: 500px;
@@ -23,7 +21,7 @@
   border-radius: 30px;
   padding: 40px;
   margin: auto;
-  user-select: none;
+  text-align: left;
 }
 .box_background {
   z-index: 1;
@@ -32,7 +30,16 @@
   left: 0;
   bottom: 0;
   right: 0;
-  background: rgba(0, 0, 0, 0.8);
+  background: rgba(0, 0, 0, 0.4);
+}
+.box_background2 {
+  z-index: 1;
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.001);
 }
 .other {
   text-align: center;
@@ -58,8 +65,16 @@
   margin-left: 30%;
   margin-right: 30%;
   background: #00adb5;
-  width: 700px;
+  width: 500px;
   text-align: left;
+}
+.card:hover {
+  transform: scale(1.06);
+  -webkit-transform: scale(1.06);
+  -moz-transform: scale(1.06);
+  -ms-transform: scale(1.06);
+  -o-transform: scale(1.06);
+  transition: all 0.2s ease-in-out;
 }
 .post {
   cursor: pointer;
@@ -71,10 +86,39 @@
 .h5 {
   text-align: left;
 }
-.information {
-  width: 600px;
-  text-align: left;
-}
+
 .hour {
   text-align: right;
+  position: relative;
+  bottom: 24px;
+}
+.search {
+  margin-top: 30px;
+  width: 230px;
+  height: 38px;
+  position: relative;
+}
+.writeButton {
+  position: relative;
+  left: 230px;
+  bottom: 0px;
+  margin-left: 3px;
+}
+.writeButton2 {
+  position: relative;
+  left: 230px;
+  bottom: 63px;
+  margin-left: 3px;
+}
+.searchBox {
+  width: 300px;
+  position: absolute;
+  left: 55%;
+  bottom: 50%;
+  height: 80px;
+}
+.glass {
+  position: relative;
+  left: 200px;
+  bottom: 30px;
 }

@@ -3,6 +3,7 @@ import { useState, useRef } from "react";
 import { useHistory, useParams } from "react-router-dom";
 import axios from "axios";
 import Update from "./Update";
+import { Button } from "react-bootstrap";
 
 function Detail(props) {
   const nodeRef = useRef(null);
@@ -30,44 +31,48 @@ function Detail(props) {
 
   return (
     <div className="box_background">
-      <Draggable onDrag={(e, data) => trackPos(data)} nodeRef={nodeRef}>
-        <div ref={nodeRef} className="box">
-          <div className="information">
-            <h4 className="h4">{result.name}님</h4>
+      <Draggable onDrag={(e, data) => trackPos(data)}>
+        <div className="box2">
+          <h4 className="h4">{result.name}님</h4>
+          <hr />
 
-            <h5 className="h5">title:</h5>
-            <h5 className="h5">{result.title}</h5>
+          <h5 className="h5">title:</h5>
+          <h5 className="h5">{result.title}</h5>
+          <hr />
 
-            <h5 className="h5">text:</h5>
-            <h5 className="h5">{result.text}</h5>
+          <h5 className="h5">text:</h5>
+          <h5 className="h5">{result.text}</h5>
+          <hr />
 
-            <div className="buttonInbox">
-              <a href="/" style={{ textDecoration: "none" }}>
-                <button onClick={deletePost}>삭제</button>
-              </a>
-              <button
-                onClick={() => {
-                  history.goBack();
-                }}
-              >
-                닫기
-              </button>
-              {modal === true ? (
-                <Update
-                  name={result.name}
-                  title={result.title}
-                  text={result.text}
-                  id={id}
-                />
-              ) : null}
-              <button
-                onClick={() => {
-                  setModal(!modal);
-                }}
-              >
-                수정
-              </button>
-            </div>
+          <div className="buttonInbox">
+            <a href="/" style={{ textDecoration: "none" }}>
+              <Button onClick={deletePost}>✂</Button>
+            </a>
+
+            <Button
+              className="m-2"
+              onClick={() => {
+                history.goBack();
+              }}
+            >
+              🏠
+            </Button>
+            {modal === true ? (
+              <Update
+                name={result.name}
+                title={result.title}
+                text={result.text}
+                id={id}
+              />
+            ) : null}
+
+            <Button
+              onClick={() => {
+                setModal(!modal);
+              }}
+            >
+              🛠
+            </Button>
           </div>
         </div>
       </Draggable>

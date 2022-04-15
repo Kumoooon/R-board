@@ -4,7 +4,7 @@ const app = express();
 const cors = require("cors");
 app.use(cors());
 app.listen(3001, () => {
-  console.log("server is running on port 3001");
+  console.log(`server is running`);
 });
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -18,7 +18,22 @@ app.get("/board", (req, res) => {
   client.end;
 });
 
-app.get("/board/:id", (req, res) => {
+app.get("/board/paginate/:limit/:offset", (req, res) => {
+  console.log(req.params)
+  client.query(
+    `SELECT * FROM board order by id limit ${req.params.limit} offset ${req.params.offset};`,
+    (err, result) => {
+      if (!err) {
+        res.send(result.rows);
+      } else {
+        console.log(err.message);
+      }
+    }
+  );
+  client.end;
+});
+
+/*app.get("/board/:id", (req, res) => {
   client.query(
     `SELECT * FROM board WHERE id = ${req.params.id}`,
     (err, result) => {
@@ -31,6 +46,8 @@ app.get("/board/:id", (req, res) => {
   );
   client.end;
 });
+*/
+
 
 app.post("/board/create", (req, res) => {
   console.log(req.body);
@@ -74,3 +91,5 @@ app.put("/board/:id", (req, res) => {
   });
   client.end;
 });
+
+

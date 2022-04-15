@@ -1,6 +1,7 @@
 import React from "react";
 import { useState } from "react";
 import { useHistory } from "react-router-dom";
+import { Button } from "react-bootstrap";
 
 import Modal from "./Modal";
 export default function Modalonoff() {
@@ -10,13 +11,16 @@ export default function Modalonoff() {
   return (
     <>
       {modal === false ? null : <Modal />}
-      <button
+
+      <Button
+        className="writeButton2"
+        variant="primary"
         onClick={() => {
           setModal(!modal);
         }}
       >
-        글쓰기
-      </button>
+        ✏
+      </Button>
     </>
   );
 }

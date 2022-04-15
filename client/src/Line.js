@@ -1,24 +1,29 @@
+import { useState } from "react";
 import { useHistory } from "react-router-dom";
-import { Route } from "react-router-dom";
+import Box from "./Box";
 
 function Line(props) {
   let history = useHistory();
+  let [Post, SetPost] = useState(false);
 
   return (
     <>
+      {Post ? <Box list={props.list} id={props.a.id} post={Post} /> : null}
       <div
         onClick={() => {
-          history.push(`/detail/${props.a.id}`);
+          SetPost(!Post);
         }}
       >
-        <span className="post">
-          {props.a.name}님 ------
-          {props.a.title}
+        <span className="card">
+          <span className="post">
+            {props.a.name}님 ------
+            {props.a.title}
+          </span>
+          <span className="hour">{props.a.createtime}</span>
         </span>
-        <span className="hour">-->{props.a.createtime}</span>
-        <Route path="/detail/:id"></Route>
       </div>
     </>
   );
 }
+
 export default Line;

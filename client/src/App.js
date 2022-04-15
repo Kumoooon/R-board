@@ -1,48 +1,95 @@
 import "./App.css";
-import { React, useEffect, useState } from "react";
+import { React, useEffect, useRef, useState } from "react";
 import Axios from "axios";
 import Header from "./Header";
 import Line from "./Line";
 import { Route } from "react-router-dom";
-import Research from "./Research";
 import Detail from "./Detail";
 import Modalonoff from "./Modalonoff";
-import create from "zustand";
-const useStore = create(() => ({}));
 function App() {
-  let [list, setList] = useState([]);
-  const showEmployee = () => {
-    Axios.get("http://localhost:3001/board")
+ // let [list, setList] = useState([]);
+  let [lists, setLists] = useState([]);
+  let [limit, setlimit] = useState(10);
+  let [offset, setoffset] = useState(0);
+  console.log("offset : ",offset)
+  const getDatab = () => {
+    Axios.get(`http://localhost:3001/board/paginate/${limit}/${offset}`)
       .then((response) => {
-        setList(response.data);
+        
+        setoffset(response.data.length)
+        setLists(response.data)
       })
-
       .catch(() => {
         console.log("error");
       });
   };
+
+ /* const getData = () => {
+    Axios.get("http://localhost:3001/board")
+      .then((response) => {
+        setList(response.data);
+        console.log(response.data)
+      })
+      .catch(() => {
+        console.log("error");
+      });
+  };*/
+
+
+
   useEffect(() => {
-    showEmployee();
+   // getData();
+    getDatab();
   }, []);
+  let [search, setSearch] = useState("");
+  const items = lists
+    .filter((a) => {
+      if (search == "") {
+        return a;
+      } else if (
+        a.name.includes(search) ||
+        a.title.includes(search) ||
+        a.text.includes(search)
+      ) {
+        return a;
+      }
+    })
+    .map((a, i) => {
+      return (
+        <div>
+          <Line a={a} i={i} list={lists} />
+        </div>
+      );
+    });
+
   return (
     <div>
-      <Header />
-      <div className="other">
-        {list.map((a, i) => {
-          return (
-            <div className="card">
-              <Line a={a} i={i} />
-            </div>
-          );
-        })}
-        <Research list={list} />
+  
+      <div>
+        <Header />
+        {items}
         <Route path="/detail/:id">
-          <Detail list={list} />
+          <Detail list={lists} />
         </Route>
-        <Modalonoff />
+
+        <div className="searchBox">
+          <input
+            className="text-gray-700 rounded search"
+            type="text"
+            onChange={(e) => {
+              setSearch(e.target.value);
+            }}
+          />
+          <div className="glass">🔍</div>
+          <div>
+            <Modalonoff />
+          </div>
+        </div>
       </div>
     </div>
   );
 }
 
 export default App;
+
+

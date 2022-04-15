@@ -2,6 +2,7 @@ import Draggable from "react-draggable";
 import { useState, useRef } from "react";
 import Axios from "axios";
 import { useHistory } from "react-router-dom";
+import { Button } from "react-bootstrap";
 
 function Update(props) {
   const nodeRef = useRef(null);
@@ -29,46 +30,64 @@ function Update(props) {
   };
 
   return (
-    <div className="box_background">
+    <div className="box_background2">
       <Draggable onDrag={(e, data) => trackPos(data)} nodeRef={nodeRef}>
         <div ref={nodeRef} className="box">
-          <div className="information">
-            <label>Name:</label>
-            <input
-              value={name}
-              type="text"
-              onChange={(e) => {
-                setName(e.target.value);
+          <label>작성자:</label>
+          <input
+            className="m-0 text-gray-700 transition ease-in-out border border-gray-300 border-solid rounded focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+            type="text"
+            onChange={(e) => {
+              setName(e.target.value);
+            }}
+            value={name}
+          />
+          <hr />
+          <label>Title:</label>
+          <input
+            className="m-0 text-gray-700 transition ease-in-out border border-gray-300 border-solid rounded focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+            type="text"
+            onChange={(e) => {
+              setTitle(e.target.value);
+            }}
+            value={title}
+          />
+          <hr />
+          <label>Text:</label>
+
+          <textarea
+            class="
+        form-control
+        block
+        w-full
+        px-3
+        py-1.5
+        text-base
+        font-normal
+        text-gray-700
+        bg-white bg-clip-padding
+        border border-solid border-gray-300
+        rounded
+        m-0 
+      "
+            rows="3"
+            placeholder="..."
+            value={text}
+            onChange={(e) => {
+              setText(e.target.value);
+            }}
+          ></textarea>
+          <hr />
+          <a href="/" style={{ textDecoration: "none" }}>
+            <Button
+              onClick={() => {
+                updateEmployee();
               }}
-            />
-            <label>Title:</label>
-            <input
-              value={title}
-              type="text"
-              onChange={(e) => {
-                setTitle(e.target.value);
-              }}
-            />
-            <label>Text:</label>
-            <input
-              value={text}
-              style={{ height: "50px" }}
-              type="text"
-              onChange={(e) => {
-                setText(e.target.value);
-              }}
-            />
-            <a href="/" style={{ textDecoration: "none" }}>
-              <button
-                onClick={() => {
-                  updateEmployee();
-                }}
-              >
-                저장
-              </button>
-            </a>
-            <div></div>
-          </div>
+            >
+              🛠
+            </Button>
+          </a>
+          <div></div>
         </div>
       </Draggable>
     </div>
