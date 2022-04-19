@@ -42,6 +42,7 @@ function Update(props) {
             }}
             value={name}
           />
+          
           <hr />
           <label>Title:</label>
           <input
@@ -87,6 +88,9 @@ function Update(props) {
               🛠
             </Button>
           </a>
+          <a href="/" style={{ textDecoration: "none" }}>
+              <Button>🏠</Button>
+            </a>
           <div></div>
         </div>
       </Draggable>

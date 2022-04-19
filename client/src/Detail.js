@@ -48,6 +48,7 @@ function Detail(props) {
             <a href="/" style={{ textDecoration: "none" }}>
               <Button onClick={deletePost}>✂</Button>
             </a>
+           
 
             <Button
               className="m-2"

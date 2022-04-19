@@ -54,6 +54,14 @@
   background-color: rgba(34, 40, 49);
   height: 80px;
 }
+.card:hover {
+  transform: scale(1.06);
+  -webkit-transform: scale(1.06);
+  -moz-transform: scale(1.06);
+  -ms-transform: scale(1.06);
+  -o-transform: scale(1.06);
+  transition: all 0.2s ease-in-out;
+}
 
 .card {
   border: 1px solid black;
@@ -67,15 +75,10 @@
   background: #00adb5;
   width: 500px;
   text-align: left;
+
+
 }
-.card:hover {
-  transform: scale(1.06);
-  -webkit-transform: scale(1.06);
-  -moz-transform: scale(1.06);
-  -ms-transform: scale(1.06);
-  -o-transform: scale(1.06);
-  transition: all 0.2s ease-in-out;
-}
+
 .post {
   cursor: pointer;
 }
@@ -116,6 +119,7 @@
   left: 55%;
   bottom: 50%;
   height: 80px;
+  z-index: 10;
 }
 .glass {
   position: relative;

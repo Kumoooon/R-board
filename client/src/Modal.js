@@ -75,6 +75,14 @@ function Modal() {
           <hr />
           <a href="/" style={{ textDecoration: "none" }}>
             <Button
+              className="relative"
+              onClick={() => {
+                history.goBack();
+              }}
+            >
+              🏠
+            </Button>
+            <Button
               className="writeButton"
               variant="primary"
               onClick={() => {
@@ -85,8 +93,6 @@ function Modal() {
               ✏
             </Button>
           </a>
-
-          <div></div>
         </div>
       </Draggable>
     </div>
